@@ -1,7 +1,7 @@
 const today = new Date();
 const this_year = today.getFullYear();
 
-// start as this year's groundhog day
+// start as this year's groundhog day (months 0-11)
 var groundhog_day = new Date(this_year, 1, 2, 23, 59, 59);
 // if its past, update the year by +1, otherwise does not change
 groundhog_day.setFullYear(this_year + (groundhog_day.getTime() < today.getTime()));
