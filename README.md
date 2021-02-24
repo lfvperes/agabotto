@@ -1,7 +1,7 @@
 # Groundhog Day
 A Twitter bot that tracks when it's Groundhog Day. 
 
-<div>
+<div align="right">
   
   [![](https://img.shields.io/badge/twitter-%231DA1F2.svg?&logo=twitter&logoColor=white)](https://twitter.com/GroundhogDayy)
   
