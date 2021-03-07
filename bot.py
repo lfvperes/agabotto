@@ -1,7 +1,7 @@
 import datetime, tweepy, os
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv()   # loading environment variables
 
 # calculate how many days remain for G-day
 def countdown(today):
