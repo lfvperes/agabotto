@@ -30,15 +30,15 @@ def season(today):
     winter = datetime.datetime(this_year, 12, 21)
 
     if today < spring:      # before spring equinox
-        return 'winter'
+        return 'winter ⛄'
     elif today < summer:    # after spring equinox, before summer solstice
-        return 'spring'
+        return 'spring 🌱'
     elif today < autumn:    # after summer solstice, before autumn equinox
-        return 'summer'
+        return 'summer 🌞'
     elif today < winter:    # after autumn equinox, before winter solstice
-        return 'autumn'
+        return 'autumn 🍂'
     else:                   # after winter solstice
-        return 'winter'
+        return 'winter ⛄'
 
 auth = tweepy.OAuthHandler(os.environ['TWITTER_CONSUMER_KEY'], os.environ['TWITTER_CONSUMER_SECRET'])
 auth.set_access_token(os.environ['TWITTER_TOKEN_KEY'], os.environ['TWITTER_TOKEN_SECRET'])
@@ -57,10 +57,10 @@ def tweet(today):
         # formatting date as 'Weekday, Month dd yyyy'
         today_text = today.strftime("%A, %B %d %Y")
         # template to be formatted and tweeted
-        template = "It's {0}. Punxsutawney Phil says: {1} days remaining for Groundhog Day!\n#{2}"
+        template = "Punxsutawney Phil says: {1} days until #GroundhogDay!\nIt's {0}. \n#{2}"
         status = template.format(today_text, remaining, season_name)
         # select picture according to season
-        filename = 'img/{}.jpg'.format(season_name)
+        filename = 'img/{}.jpg'.format(season_name[:-2])
     
     # upload media and get media ID before tweeting
     media_id = api.media_upload(filename).media_id_string
