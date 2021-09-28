@@ -1,5 +1,5 @@
-# Groundhog Day
-A Twitter bot that interact with tweets related to the Semcomp 24 event from University of São Paulo.
+# Agabotto, the Agamotto bot
+A Twitter bot that interact with tweets related to the Semcomp 24 event from University of São Paulo. Specifically, related to the Agamotto house from the internal competition.
 
 <div align="right">
   
