@@ -45,13 +45,13 @@ def interact(query=default, count=5, RT=True):
         # check if tweet was already liked and/or retweeted before doing so
         status = api.get_status(tweet_id)
         if not status.favorited:
-            # api.create_favorite(tweet_id)
+            api.create_favorite(tweet_id)
             print("Just liked!")
         else:
             print("Tweet was already liked.")
 
         if not status.retweeted and RT:
-            # api.retweet(tweet_id)
+            api.retweet(tweet_id)
             print("Just retweeted!")
         elif status.retweeted:
             print("Tweet was already retweeted.")
