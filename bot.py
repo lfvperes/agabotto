@@ -44,19 +44,22 @@ def interact(query=default, count=5, RT=True):
 
         # check if tweet was already liked and/or retweeted before doing so
         status = api.get_status(tweet_id)
-        if not status.favorited:
-            api.create_favorite(tweet_id)
-            print("Just liked!")
+        if username == "agabotto_":
+            print("Won't interact with own tweet.")
         else:
-            print("Tweet was already liked.")
+            if not status.favorited:
+                api.create_favorite(tweet_id)
+                print("Just liked!")
+            else:
+                print("Tweet was already liked.")
 
-        if not status.retweeted and RT:
-            api.retweet(tweet_id)
-            print("Just retweeted!")
-        elif status.retweeted:
-            print("Tweet was already retweeted.")
-        elif not RT:
-            print("Won't RT the enemy.")
+            if not status.retweeted and RT:
+                api.retweet(tweet_id)
+                print("Just retweeted!")
+            elif status.retweeted:
+                print("Tweet was already retweeted.")
+            elif not RT:
+                print("Won't RT the enemy.")
 
 
 def generate_text():
@@ -79,9 +82,9 @@ def generate_text():
 generate_text()
 
 # Agamotto (like + RT)
-# interact(default, 20)
+interact(default, 20)
 
 # other tweets (only like)
 more_hashtags = ['semcomp', 'semcompou', 'semcomp24', 'casaOcarina', 'casaTardis', 'casaDelorean']
 query = random.choice(more_hashtags)
-# interact(f'#{query}', 15, False)
+interact(f'#{query}', 15, False)
