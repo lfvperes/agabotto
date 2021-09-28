@@ -1,4 +1,4 @@
-import tweepy, os, random
+import tweepy, os, random, srt
 from dotenv import load_dotenv
 
 load_dotenv()   # loading environment variables
@@ -58,10 +58,30 @@ def interact(query=default, count=5, RT=True):
         elif not RT:
             print("Won't RT the enemy.")
 
+
+def generate_text():
+    with open("text/source.srt", "r") as file:
+        source_text = file.read()
+
+    subtitle_generator = srt.parse(source_text)
+    subtitles = list(subtitle_generator)
+
+    line = random.choice(range(len(subtitles)+1))
+    text = subtitles[line].content
+
+    hashtags = ['casaAgamotto', 'semcompou', 'semcomp24', 'semcomp']
+    random.shuffle(hashtags)
+    status = f"{text} #{hashtags[0]} #{hashtags[1]} #{hashtags[2]} #{hashtags[3]}"
+
+    print(status)
+    tweet(status)
+
+generate_text()
+
 # Agamotto (like + RT)
-interact(default, 15)
+# interact(default, 20)
 
 # other tweets (only like)
 more_hashtags = ['semcomp', 'semcompou', 'semcomp24', 'casaOcarina', 'casaTardis', 'casaDelorean']
 query = random.choice(more_hashtags)
-interact(f'#{query}', 15, False)
+# interact(f'#{query}', 15, False)
