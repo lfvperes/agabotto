@@ -23,9 +23,12 @@ default = "#casaAgamotto"
 def interact(query=default, count=5, RT=True):
     # search for tweets based on given query
     result = api.search_tweets(query, count=count, result_type="recent")
+    print(f"Searching for {query}...")
+    print(f"-------------------------\nFound {len(result)} results!")
 
+    N = min(count, len(result))
     # iterate through found tweets
-    for i in range(count):
+    for i in range(N):
         # organize data
         info = result[i]._json
         username = info['user']['screen_name']
@@ -33,8 +36,8 @@ def interact(query=default, count=5, RT=True):
         tweet_id = info['id']
         user_id = info['user']['id']
 
-        print('-------------------------\nfound:')
-        print(username)
+        print(f'-------------------------\n #{i+1} found:')
+        print(f'@{username}:')
         print(text)
 
         hashtags = [h['text'] for h in info['entities']['hashtags']]
@@ -61,4 +64,4 @@ interact(default, 15)
 # other tweets (only like)
 more_hashtags = ['semcomp', 'semcompou', 'semcomp24', 'casaOcarina', 'casaTardis', 'casaDelorean']
 query = random.choice(more_hashtags)
-interact(query, 15, False)
+interact(f'#{query}', 15, False)
