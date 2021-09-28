@@ -1,4 +1,4 @@
-import datetime, tweepy, os
+import tweepy, os, random
 from dotenv import load_dotenv
 
 load_dotenv()   # loading environment variables
@@ -20,7 +20,7 @@ def tweet(text=''):
 
 default = "#casaAgamotto"
 
-def interact(query=default, count=5):
+def interact(query=default, count=5, RT=True):
     # search for tweets based on given query
     result = api.search_tweets(query, count=count, result_type="recent")
 
@@ -37,6 +37,8 @@ def interact(query=default, count=5):
         print(username)
         print(text)
 
+        hashtags = [h['text'] for h in info['entities']['hashtags']]
+
         # check if tweet was already liked and/or retweeted before doing so
         status = api.get_status(tweet_id)
         if not status.favorited:
@@ -45,11 +47,18 @@ def interact(query=default, count=5):
         else:
             print("Tweet was already liked.")
 
-        if not status.retweeted:
+        if not status.retweeted and RT:
             api.retweet(tweet_id)
             print("Just retweeted!")
-        else:
+        elif status.retweeted:
             print("Tweet was already retweeted.")
+        elif not RT:
+            print("Won't RT the enemy.")
 
+# Agamotto (like + RT)
+interact(default, 15)
 
-interact(default,10)
+# other tweets (only like)
+more_hashtags = ['semcomp', 'semcompou', 'semcomp24', 'casaOcarina', 'casaTardis', 'casaDelorean']
+query = random.choice(more_hashtags)
+interact(query, 15, False)
