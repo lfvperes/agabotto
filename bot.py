@@ -23,7 +23,7 @@ default = "#casaAgamotto"
 def interact(query=default, count=5, RT=True):
     # search for tweets based on given query
     result = api.search_tweets(query, count=count, result_type="recent")
-    print(f"Searching for {query}...")
+    print(f"-------------------------\nSearching for {query}...")
     print(f"-------------------------\nFound {len(result)} results!")
 
     N = min(count, len(result))
@@ -36,7 +36,7 @@ def interact(query=default, count=5, RT=True):
         tweet_id = info['id']
         user_id = info['user']['id']
 
-        print(f'-------------------------\n #{i+1} found:')
+        print(f'-------------------------\n#{i+1} found:')
         print(f'@{username}:')
         print(text)
 
@@ -45,13 +45,13 @@ def interact(query=default, count=5, RT=True):
         # check if tweet was already liked and/or retweeted before doing so
         status = api.get_status(tweet_id)
         if not status.favorited:
-            api.create_favorite(tweet_id)
+            # api.create_favorite(tweet_id)
             print("Just liked!")
         else:
             print("Tweet was already liked.")
 
         if not status.retweeted and RT:
-            api.retweet(tweet_id)
+            # api.retweet(tweet_id)
             print("Just retweeted!")
         elif status.retweeted:
             print("Tweet was already retweeted.")
