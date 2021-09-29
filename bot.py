@@ -63,7 +63,7 @@ def interact(query=default, count=5, RT=True):
 
 
 def generate_text():
-    with open("text/source.srt", "r") as file:
+    with open("text/source.srt", "r", encoding='iso-8859-1') as file:
         source_text = file.read()
 
     subtitle_generator = srt.parse(source_text)
